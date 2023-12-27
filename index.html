@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>화학 요소 원자 기호 맞추기 게임</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input[type="text"] {
+      padding: 5px;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>원자 이름 맞추기 게임</h1>
+  <p>화학 요소의 원자 이름을 보고 해당하는 원자 기호를 맞추세요.</p>
+
+  <div id="elementDisplay">
+    <!-- 여기에 화학 요소 원자 이름이 표시될 것입니다 -->
+  </div>
+
+  <input type="text" id="userGuess" placeholder="원자 기호를 입력하세요">
+  <button onclick="checkAnswer()">확인</button>
+
+  <p id="result"></p>
+
+  <script>
+    const elements = [
+      { name: '수소', symbol: 'H' },
+      { name: '헬륨', symbol: 'He' },
+      { name: '리튬', symbol: 'Li' },
+      { name: '베릴륨', symbol: 'Be' },
+      { name: '붕소', symbol: 'B' },
+      { name: '탄소', symbol: 'C' },
+      { name: '질소', symbol: 'N' },
+      { name: '산소', symbol: 'O' },
+      { name: '플루오린', symbol: 'F' },
+      { name: '네온', symbol: 'Ne' },
+      // 나머지 화학 요소들을 추가하세요
+      { name: '나트륨', symbol: 'Na' },
+      { name: '마그네슘', symbol: 'Mg' },
+      { name: '알루미늄', symbol: 'Al' },
+      { name: '규소', symbol: 'Si' },
+      { name: '인', symbol: 'P' },
+      { name: '황', symbol: 'S' },
+      { name: '염소', symbol: 'Cl' },
+      { name: '아르곤', symbol: 'Ar' },
+      { name: '칼륨', symbol: 'K' },
+      { name: '칼슘', symbol: 'Ca' },
+      { name: '스칸듐', symbol: 'Sc' },
+      { name: '티타늄', symbol: 'Ti' },
+      { name: '바나듐', symbol: 'V' },
+      { name: '크로뮴', symbol: 'Cr' },
+      { name: '망가니즈', symbol: 'Mn' },
+      { name: '철', symbol: 'Fe' },
+      { name: '코발트', symbol: 'Co' },
+      { name: '니켈', symbol: 'Ni' },
+      { name: '구리', symbol: 'Cu' },
+      { name: '아연', symbol: 'Zn' },
+      { name: '갈륨', symbol: 'Ga' },
+      { name: '게르마늄', symbol: 'Ge' },
+      { name: '비소', symbol: 'As' },
+      { name: '셀레늄', symbol: 'Se' },
+      { name: '브로민', symbol: 'Br' },
+      { name: '크립톤', symbol: 'Kr' },
+      { name: '루비듐', symbol: 'Rb' },
+      { name: '스트론튬', symbol: 'Sr' },
+      { name: '이트륨', symbol: 'Y' },
+      { name: '지르코늄', symbol: 'Zr' },
+      { name: '나이오븀', symbol: 'Nb' },
+      { name: '몰리브데넘', symbol: 'Mo' },
+      { name: '테크네튬', symbol: 'Tc' },
+      { name: '루테늄', symbol: 'Ru' },
+      { name: '로듐', symbol: 'Rh' },
+      { name: '팔라듐', symbol: 'Pd' },
+      { name: '은', symbol: 'Ag' },
+      { name: '카드뮴', symbol: 'Cd' },
+      { name: '인듐', symbol: 'In' },
+      { name: '주석', symbol: 'Sn' },
+      { name: '안티모니', symbol: 'Sb' },
+      { name: '텔루륨', symbol: 'Te' },
+      { name: '아이오딘', symbol: 'I' },
+      { name: '제논', symbol: 'Xe' },
+      { name: '세슘', symbol: 'Cs' },
+      { name: '바륨', symbol: 'Ba' },
+      { name: '란타넘', symbol: 'La' },
+      { name: '세륨', symbol: 'Ce' },
+      { name: '프라세오디뮴', symbol: 'Pr' },
+      { name: '네오디뮴', symbol: 'Nd' },
+      { name: '프로메튬', symbol: 'Pm' },
+      { name: '사마륨', symbol: 'Sm' },
+      { name: '유로퓸', symbol: 'Eu' },
+      { name: '가돌리늄', symbol: 'Gd' },
+      { name: '터븀', symbol: 'Tb' },
+      { name: '디스프로슘', symbol: 'Dy' },
+      { name: '홀뮴', symbol: 'Ho' },
+      { name: '어븀', symbol: 'Er' },
+      { name: '툴륨', symbol: 'Tm' },
+      { name: '이터븀
